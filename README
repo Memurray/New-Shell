@@ -1,0 +1,51 @@
+Quick Notes:
+	Compile: make
+	run: ./newsh
+	supports redirection input but output formatting is poor using this method
+	PROMPT setting adds a space but no assignment of a terminating character like '$' automatically (though default is still newsh$)
+		this is intentional but potentially doesn't match with what was expected.
+	PATH is default set to /bin/ so that immediatly running ls or ps or echo will function (without having to specify /bin/ls/ etc)
+		however, /bin/ is not always assumed, so if you change PATH with set function and dont re-include /bin/ they will stop being recognized
+	When running programs in the background, prompt will immediately display but can be partially obscured by inconvient timing of background stdout
+	Background proccesses are allowed to continue running even after newsh is closed, this isnt explicitly a limitation 
+		I just was unsure which was expected but I prefered to allow their continued execution
+	
+Testing:
+	Testing occured in 2 forms
+	1.) testfile redirected in
+		this performed as expected and both testfile and testfileout are provided in this directory
+		but output is very rough considering the order that the operations chose to print to the screen
+	2.)script file
+		every major concept expected in this assignment was hand tested while a script file was logging the output
+		this file is provided in this directory as LogFile
+	Testing comments:
+		I used the test programs p10, p20, p30 provided by Dr. Fei for background testing
+		These programs are in the directory ./p3files
+		p3files is not part of the original PATH variable therefore running p10 immediately from newsh will not work
+		cd p3files or using the set function to add ./p3files/ to PATH variable allows them to be run
+
+Commands:
+	set variable value
+		will save value to variable name
+		if variable exists will overwrite value with new one	
+		if variable is PROMPT will change shell prompt to value, space is added at the end automatically
+		if variable is PATH, no obvious response difference but this is used for locating programs
+	cd directoryName
+		will print out current directory before changing
+		will either print new directory (if valid) or error message (if not valid)
+	bp
+		print either a list of background processes or empty list message
+	quit
+		closes the program, also works with EOF
+	cmd param*
+		if explicit location is specified, uses that
+		if not, checks all paths colon seperated in PATH variable
+	cmd param* &
+		space between end of param and & required
+		runs program in the background
+
+
+
+
+
+
